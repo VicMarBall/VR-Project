@@ -19,6 +19,8 @@ public class DogoBehavior : MonoBehaviour
     GameObject carriedToy;
 
     public ParticleSystem happyParticles;
+    public ParticleSystem petParticles;
+
     void GrabToy(GameObject toy)
     {
         carriedToy = toy;
@@ -57,4 +59,10 @@ public class DogoBehavior : MonoBehaviour
     {
         happyParticles.Play();
     }
+
+    public void PlayPetParticles()
+    {
+        petParticles.Play();
+    }
+
 }
