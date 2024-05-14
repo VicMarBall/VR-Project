@@ -11,11 +11,14 @@ public class DogoBehavior : MonoBehaviour
         SLEEPING
     }
 
+    public GameObject objectLookingAt;
+
     public List<GameObject> toys;
 
     bool isCarryingToy;
     GameObject carriedToy;
 
+    public ParticleSystem happyParticles;
     void GrabToy(GameObject toy)
     {
         carriedToy = toy;
@@ -35,9 +38,23 @@ public class DogoBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isCarryingToy)
+        // change to coroutines
+        if (objectLookingAt != null)
         {
-            return;
+            transform.LookAt(objectLookingAt.transform);
         }
+        if (Vector3.Distance(transform.position, objectLookingAt.transform.position) < 5)
+        {
+            GetComponent<Animator>().SetBool("HappyDogo", true);
+        }
+        else
+        {
+            GetComponent<Animator>().SetBool("HappyDogo", false);
+        }
+    }
+
+    void PlayHappyParticles()
+    {
+        happyParticles.Play();
     }
 }
