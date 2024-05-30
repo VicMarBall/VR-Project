@@ -6,7 +6,7 @@ public class PetInteraction : MonoBehaviour
 {
     public Collider[] interactorColliders;
 
-    bool isGettingPet;
+    List<Collider> handsPetting;
 
     float timeSinceLastPetEvent = 0;
 
@@ -20,13 +20,14 @@ public class PetInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (isGettingPet)
+        if (handsPetting.Count > 0)
         {
             timeSinceLastPetEvent += Time.deltaTime;
         }
 
         if (timeSinceLastPetEvent >= inBetweenPetEventPeriodTime)
         {
+            PetEvent();
             timeSinceLastPetEvent = 0;
         }
     }
@@ -42,11 +43,11 @@ public class PetInteraction : MonoBehaviour
         {
             if (collision.collider == collider)
             {
-                if (!isGettingPet)
+                if (handsPetting.Count == 0)
                 {
                     timeSinceLastPetEvent = 0;
                 }
-                isGettingPet = true;
+                handsPetting.Add(collider);
             }
         }
     }
@@ -56,8 +57,11 @@ public class PetInteraction : MonoBehaviour
         {
             if (collision.collider == collider)
             {
-                isGettingPet = false;
-                timeSinceLastPetEvent = 0;
+                handsPetting.Remove(collider);
+                if (handsPetting.Count == 0)
+                {
+                    timeSinceLastPetEvent = 0;
+                }
             }
         }
     }
