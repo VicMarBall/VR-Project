@@ -6,11 +6,13 @@ public class PetInteraction : MonoBehaviour
 {
     public Collider[] interactorColliders;
 
-    List<Collider> handsPetting;
+    List<Collider> handsPetting = new List<Collider>();
 
     float timeSinceLastPetEvent = 0;
 
-    public float inBetweenPetEventPeriodTime;
+    public float inBetweenPetEventPeriodTime = 1.0f;
+
+    public ParticleSystem eventParticleSystem;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,8 @@ public class PetInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log("Pet Update");
+
         if (handsPetting.Count > 0)
         {
             timeSinceLastPetEvent += Time.deltaTime;
@@ -35,29 +39,44 @@ public class PetInteraction : MonoBehaviour
     public void PetEvent()
     {
         // reaction
+        Debug.Log("PetEventActivated");
+        eventParticleSystem.Play();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        foreach (Collider collider in interactorColliders)
+        Debug.Log("ENTER");
+
+        foreach (Collider handCollider in interactorColliders)
         {
-            if (collision.collider == collider)
+            Debug.Log("ENTER: foreach (Collider collider in interactorColliders)");
+
+            if (other == handCollider)
             {
+                Debug.Log("ENTER: other == collider");
+
                 if (handsPetting.Count == 0)
                 {
                     timeSinceLastPetEvent = 0;
                 }
-                handsPetting.Add(collider);
+                handsPetting.Add(other);
             }
         }
     }
-    private void OnCollisionExit(Collision collision)
+
+    private void OnTriggerExit(Collider other)
     {
+        Debug.Log("EXIT");
+
         foreach (Collider collider in interactorColliders)
         {
-            if (collision.collider == collider)
+            Debug.Log("EXIT: foreach (Collider collider in interactorColliders)");
+
+            if (other == collider)
             {
-                handsPetting.Remove(collider);
+                Debug.Log("EXIT: other == collider");
+
+                handsPetting.Remove(other);
                 if (handsPetting.Count == 0)
                 {
                     timeSinceLastPetEvent = 0;
