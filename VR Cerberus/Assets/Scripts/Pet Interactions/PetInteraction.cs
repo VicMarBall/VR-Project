@@ -8,7 +8,7 @@ public class PetInteraction : MonoBehaviour
 
     List<Collider> handsPetting = new List<Collider>();
 
-    float timeSinceLastPetEvent = 0;
+    float timeSinceLastPetEvent = 0.0f;
 
     public float inBetweenPetEventPeriodTime = 1.0f;
 
