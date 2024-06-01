@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayToyInteraction : MonoBehaviour
+public class CerberusItemInteraction : MonoBehaviour
 {
     GameObject focusedToy;
 
@@ -18,15 +18,29 @@ public class PlayToyInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+    }
+
+    public void CerberusUpdateSeekingAction()
+    {
         if (focusedToy != null)
         {
             transform.LookAt(focusedToy.transform);
         }
     }
+
+    public void CerberusUpdateFollowingAction()
+    {
+        if (focusedToy != null)
+        {
+            transform.LookAt(focusedToy.transform);
+        }
+    }
+
     private void OnTriggerStay(Collider other)
     {
         Debug.Log("OnCollisionStay");
-        if (other.gameObject.CompareTag("Toy"))
+        if (other.gameObject.CompareTag("Toy") || other.gameObject.CompareTag("Food"))
         {
             Debug.Log("OnCollisionStay is Toy");
             if (focusedToy == null)
@@ -37,6 +51,14 @@ public class PlayToyInteraction : MonoBehaviour
             {
                 focusedToy = other.gameObject;
             }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other == focusedToy)
+        {
+            focusedToy = null;
         }
     }
 }
