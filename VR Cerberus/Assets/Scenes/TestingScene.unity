@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 195860375}
   m_Layer: 0
   m_Name: Kinematic
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1659,7 +1659,7 @@ GameObject:
   - component: {fileID: 706832657}
   m_Layer: 0
   m_Name: Instantaneous
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4370,7 +4370,7 @@ GameObject:
   - component: {fileID: 1825681533}
   m_Layer: 0
   m_Name: Velocity Tracking
-  m_TagString: Untagged
+  m_TagString: Toy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

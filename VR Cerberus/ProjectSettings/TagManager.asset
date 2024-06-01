@@ -4,7 +4,8 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - DogoToy
+  - Anchor
+  - Toy
   layers:
   - Default
   - TransparentFX
