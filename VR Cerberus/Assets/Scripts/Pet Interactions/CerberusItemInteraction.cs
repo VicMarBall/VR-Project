@@ -5,8 +5,6 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class CerberusItemInteraction : MonoBehaviour
 {
-    public CerberusActionManager actionManager;
-
     GameObject focusedItem;
 
     public float itemGrabDistance;
@@ -34,21 +32,45 @@ public class CerberusItemInteraction : MonoBehaviour
         }
     }
 
-    public void CerberusUpdateSeekingAction()
+    public void CerberusSeekingUpdate()
     {
         if (focusedItem != null)
         {
             transform.LookAt(focusedItem.transform);
+
+            if (CanGrab())
+            {
+                GrabFocusedItem();
+            }
         }
     }
 
-    public void CerberusUpdateFollowingAction()
+    public void CerberusEatingUpdate()
     {
-        if (focusedItem != null)
-        {
-            transform.LookAt(focusedItem.transform);
-        }
+        //if (focusedItem != null)
+        //{
+        //    transform.LookAt(focusedItem.transform);
+
+        //    if (CanGrab())
+        //    {
+        //        GrabFocusedItem();
+        //    }
+        //}
     }
+
+    public void CerberusPlayingUpdate()
+    {
+        //if (focusedItem != null)
+        //{
+        //    transform.LookAt(focusedItem.transform);
+
+        //    if (CanGrab())
+        //    {
+        //        GrabFocusedItem();
+        //    }
+        //}
+    }
+
 
     public bool IsFocused() {  return focusedItem != null; }
     public bool FocusedItemIsToy() { return focusedItem.CompareTag("Toy"); }
@@ -67,12 +89,16 @@ public class CerberusItemInteraction : MonoBehaviour
     public void GrabFocusedItem()
     {
         grabbingItem = true;
+        focusedItem.GetComponent<Rigidbody>().useGravity = false;
     }
 
     public void ReleaseFocusedItem()
     {
         grabbingItem = false;
+        focusedItem.GetComponent<Rigidbody>().useGravity = true;
     }
+
+    public bool IsGrabbing() {  return grabbingItem; }
 
     private void OnTriggerStay(Collider other)
     {

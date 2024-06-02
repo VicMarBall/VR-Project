@@ -9,58 +9,76 @@ public class CerberusActionManager : MonoBehaviour
         IDLE, 
 
         SEEKING_ITEM, // look at
-        FOLLOWING_ITEM, // moving + look at
 
-        EATING,
-        PLAYING_WITH_BALL,
+        GRABBING_ITEM,
 
-        GETTING_PET,
-        GETTING_CLEANED,
+        GETTING_TOUCHED,
 
         SLEEPING
     }
 
-    public Cerberus cerberus;
+    public CerberusStats cerberus;
 
     public CerberusAction currentAction;
 
-    CerberusItemInteraction itemInteraction;
+    public CerberusItemInteraction itemInteraction;
+
+    public CerberusTouchInteraction leftTouchInteraction;
+    public CerberusTouchInteraction middleTouchInteraction;
+    public CerberusTouchInteraction rightTouchInteraction;
 
     // Start is called before the first frame update
     void Start()
     {
         itemInteraction = gameObject.GetComponent<CerberusItemInteraction>();
-        itemInteraction.actionManager = this;
 
         if (itemInteraction == null) { Debug.Log("CerberusItemInteraction not found");  }
     }
 
     void UpdateCurrentAction()
     {
+        CerberusAction previousAction = currentAction;
+
         if (cerberus.IsTired())
         {
             currentAction = CerberusAction.SLEEPING;
+
+            if (previousAction == CerberusAction.GRABBING_ITEM)
+            {
+                itemInteraction.ReleaseFocusedItem();
+            }
+
+            return;
+        }
+        
+        if (leftTouchInteraction.GettingTouched() || middleTouchInteraction.GettingTouched() || rightTouchInteraction.GettingTouched())
+        {
+            currentAction = CerberusAction.GETTING_TOUCHED;
+
+            if (previousAction == CerberusAction.GRABBING_ITEM)
+            {
+                itemInteraction.ReleaseFocusedItem();
+            }
+
+            return;
+        }
+
+        if (itemInteraction.IsGrabbing())
+        {
+            currentAction = CerberusAction.GRABBING_ITEM;
+
             return;
         }
 
         if (itemInteraction.IsFocused())
         {
-            if (itemInteraction.FocusedItemIsToy())
-            {
-                //currentAction;
-            }
-            else if (itemInteraction.FocusedItemIsFood())
-            {
-                //currentAction;
-            }
+            currentAction = CerberusAction.SEEKING_ITEM;
 
+            return;
         }
+
+        currentAction = CerberusAction.IDLE;
     }
-
-
-
-
-
 
     // Update is called once per frame
     void Update()
@@ -74,23 +92,24 @@ public class CerberusActionManager : MonoBehaviour
                 break;
 
             case CerberusAction.SEEKING_ITEM:
-                itemInteraction.CerberusUpdateSeekingAction();
+                itemInteraction.CerberusSeekingUpdate();
                 break;
 
-            case CerberusAction.FOLLOWING_ITEM:
-                itemInteraction.CerberusUpdateFollowingAction();
+            case CerberusAction.GRABBING_ITEM:
+                if (itemInteraction.FocusedItemIsFood())
+                {
+                    itemInteraction.CerberusEatingUpdate();
+                }
+                else if (itemInteraction.FocusedItemIsToy())
+                {
+                    itemInteraction.CerberusPlayingUpdate();
+                }
                 break;
 
-            case CerberusAction.EATING:
-                break;
-
-            case CerberusAction.PLAYING_WITH_BALL:
-                break;
-
-            case CerberusAction.GETTING_PET:
-                break;
-
-            case CerberusAction.GETTING_CLEANED:
+            case CerberusAction.GETTING_TOUCHED:
+                leftTouchInteraction.CerberusUpdate();
+                middleTouchInteraction.CerberusUpdate();
+                rightTouchInteraction.CerberusUpdate();
                 break;
 
             case CerberusAction.SLEEPING:

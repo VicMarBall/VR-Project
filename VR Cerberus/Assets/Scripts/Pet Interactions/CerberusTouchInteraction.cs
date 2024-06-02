@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CerberusTouchInteraction : MonoBehaviour
 {
-    public CerberusHead head;
+    public CerberusStats cerberus;
 
     public Collider[] interactorColliders;
 
@@ -28,28 +28,22 @@ public class CerberusTouchInteraction : MonoBehaviour
     float timeSinceLastCleanEvent = 0.0f;
     public float inBetweenCleanEventPeriodTime = 1.0f;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("Touch Update");
+        //Debug.Log("Touch Update");
 
-        switch (action)
-        {
-            case TouchAction.CLEAN:
-                CleaningUpdate();
-                break;
-            case TouchAction.PET:
-                PetUpdate();
-                break;
-            default:
-                break;
-        }
+        //switch (action)
+        //{
+        //    case TouchAction.CLEAN:
+        //        CleaningUpdate();
+        //        break;
+        //    case TouchAction.PET:
+        //        PetUpdate();
+        //        break;
+        //    default:
+        //        break;
+        //}
 
     }
 
@@ -84,7 +78,7 @@ public class CerberusTouchInteraction : MonoBehaviour
         }
     }
 
-    public void HeadUpdate()
+    public void CerberusUpdate()
     {
         Debug.Log("Touch Update");
 
