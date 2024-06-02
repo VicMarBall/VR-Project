@@ -12,6 +12,10 @@ public class CerberusItemInteraction : MonoBehaviour
     bool grabbingItem = false;
 
     public Transform grabSocket;
+
+    float timeSinceLastBite = 0.0f;
+    public float inBetweenBitesPeriodTime = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,15 +51,26 @@ public class CerberusItemInteraction : MonoBehaviour
 
     public void CerberusEatingUpdate()
     {
-        //if (focusedItem != null)
-        //{
-        //    transform.LookAt(focusedItem.transform);
+        if (IsGrabbing())
+        {
+            timeSinceLastBite += Time.deltaTime;
+        }
 
-        //    if (CanGrab())
-        //    {
-        //        GrabFocusedItem();
-        //    }
-        //}
+        if (timeSinceLastBite >= inBetweenBitesPeriodTime)
+        {
+            if (focusedItem.GetComponent<FoodObject>() != null)
+            {
+                focusedItem.GetComponent<FoodObject>().TakeBite();
+                if (focusedItem.GetComponent<FoodObject>().IsEaten())
+                {
+                    ReleaseFocusedItem();
+                    focusedItem.SetActive(false);
+                    focusedItem = null;
+                }
+            }
+            timeSinceLastBite = 0;
+        }
+
     }
 
     public void CerberusPlayingUpdate()
