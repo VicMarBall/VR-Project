@@ -20,6 +20,8 @@ public class CerberusActionManager : MonoBehaviour
         SLEEPING
     }
 
+    public Cerberus cerberus;
+
     public CerberusAction currentAction;
 
     CerberusItemInteraction itemInteraction;
@@ -28,12 +30,44 @@ public class CerberusActionManager : MonoBehaviour
     void Start()
     {
         itemInteraction = gameObject.GetComponent<CerberusItemInteraction>();
+        itemInteraction.actionManager = this;
+
         if (itemInteraction == null) { Debug.Log("CerberusItemInteraction not found");  }
     }
+
+    void UpdateCurrentAction()
+    {
+        if (cerberus.IsTired())
+        {
+            currentAction = CerberusAction.SLEEPING;
+            return;
+        }
+
+        if (itemInteraction.IsFocused())
+        {
+            if (itemInteraction.FocusedItemIsToy())
+            {
+                //currentAction;
+            }
+            else if (itemInteraction.FocusedItemIsFood())
+            {
+                //currentAction;
+            }
+
+        }
+    }
+
+
+
+
+
 
     // Update is called once per frame
     void Update()
     {
+        UpdateCurrentAction();
+
+
         switch (currentAction)
         {
             case CerberusAction.IDLE: 

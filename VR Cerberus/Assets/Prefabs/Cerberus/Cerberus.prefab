@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2946887251149378415}
-  - component: {fileID: 3234884548029156332}
   - component: {fileID: 2468506951049715446}
+  - component: {fileID: 3221800722348194186}
   m_Layer: 0
   m_Name: Head Middle
   m_TagString: Untagged
@@ -35,19 +35,6 @@ Transform:
   m_Father: {fileID: 2856875024360879724}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3234884548029156332
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 553743822295276903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7849927dc525bbd42bebc8cddf271daf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  toyGrabRadius: 3
 --- !u!135 &2468506951049715446
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -69,6 +56,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &3221800722348194186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 553743822295276903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dccf95109668014b8195974651fbff1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  headPosition: 0
+  cerberus: {fileID: 0}
+  affection: 0
 --- !u!1 &925701968393807875
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +417,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1085094659315294900}
   - component: {fileID: 4797473109714476288}
-  - component: {fileID: 1330996032456655353}
+  - component: {fileID: 4467527674349247036}
   m_Layer: 0
   m_Name: Head Right
   m_TagString: Untagged
@@ -461,7 +463,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1330996032456655353
+--- !u!114 &4467527674349247036
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -470,10 +472,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2335376505823599629}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7849927dc525bbd42bebc8cddf271daf, type: 3}
+  m_Script: {fileID: 11500000, guid: 1dccf95109668014b8195974651fbff1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toyGrabRadius: 3
+  headPosition: 2
+  cerberus: {fileID: 0}
+  affection: 0
 --- !u!1 &4005362317173915909
 GameObject:
   m_ObjectHideFlags: 0
@@ -6291,7 +6295,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6958102422119241420}
   - component: {fileID: 1935375473666167914}
-  - component: {fileID: 3788228263439939484}
+  - component: {fileID: 3969678016845732174}
   m_Layer: 0
   m_Name: Head Left
   m_TagString: Untagged
@@ -6337,7 +6341,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3788228263439939484
+--- !u!114 &3969678016845732174
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6346,10 +6350,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6283325151396471508}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7849927dc525bbd42bebc8cddf271daf, type: 3}
+  m_Script: {fileID: 11500000, guid: 1dccf95109668014b8195974651fbff1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toyGrabRadius: 3
+  headPosition: 0
+  cerberus: {fileID: 0}
+  affection: 0
 --- !u!1 &6664317611873536297
 GameObject:
   m_ObjectHideFlags: 0
@@ -11245,6 +11251,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 468005550883545451}
+  - component: {fileID: 1330366954625416184}
+  - component: {fileID: 221414308986570090}
   m_Layer: 0
   m_Name: Cerberus
   m_TagString: Untagged
@@ -11268,6 +11276,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1330366954625416184
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291547537315381638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba93255c5c324444be2020e4c6f771c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  leftHead: {fileID: 3969678016845732174}
+  middleHead: {fileID: 3221800722348194186}
+  rightHead: {fileID: 4467527674349247036}
+  actionManager: {fileID: 221414308986570090}
+  hygiene: 0
+  satiation: 0
+  fun: 0
+  energy: 0
+  friendship: 0
+--- !u!114 &221414308986570090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7291547537315381638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ea23480130addb409466431be5b9b98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cerberus: {fileID: 1330366954625416184}
+  currentAction: 0
 --- !u!1 &7643011207121875355
 GameObject:
   m_ObjectHideFlags: 0

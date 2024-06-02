@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class Cerberus : MonoBehaviour
 {
-    public Dictionary<HeadPosition, CerberusHead> heads;
+    public CerberusHead leftHead;
+    public CerberusHead middleHead;
+    public CerberusHead rightHead;
+
+    public CerberusActionManager actionManager;
 
     public int hygiene;
     public int satiation;
@@ -17,14 +21,14 @@ public class Cerberus : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        heads[HeadPosition.LEFT].cerberus = this;
-        heads[HeadPosition.LEFT].headPosition = HeadPosition.LEFT;
+        leftHead.cerberus = this;
+        leftHead.headPosition = HeadPosition.LEFT;
 
-        heads[HeadPosition.MIDDLE].cerberus = this;
-        heads[HeadPosition.MIDDLE].headPosition = HeadPosition.MIDDLE;
+        middleHead.cerberus = this;
+        middleHead.headPosition = HeadPosition.MIDDLE;
 
-        heads[HeadPosition.RIGHT].cerberus = this;
-        heads[HeadPosition.RIGHT].headPosition = HeadPosition.RIGHT;
+        rightHead.cerberus = this;
+        rightHead.headPosition = HeadPosition.RIGHT;
     }
 
     // Update is called once per frame
@@ -36,4 +40,5 @@ public class Cerberus : MonoBehaviour
     public bool IsTired() { return (energy <= 0); }
     public bool IsDirty() { return (hygiene < 75); }
     public bool IsHungry() { return (satiation < 75); }
+    public bool IsBored() { return (fun < 75); }
 }
