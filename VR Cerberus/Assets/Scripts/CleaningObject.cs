@@ -5,7 +5,8 @@ using UnityEngine;
 public class CleaningObject : MonoBehaviour
 {
     public ParticleSystem cleaningParticles;
-
+    [SerializeField] private AudioSource audioSource;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -21,5 +22,6 @@ public class CleaningObject : MonoBehaviour
     public void CleaningEvent()
     {
         cleaningParticles.Play();
+        audioSource.Play();
     }
 }
