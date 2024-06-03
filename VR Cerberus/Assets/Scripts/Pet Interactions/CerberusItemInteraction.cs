@@ -64,6 +64,9 @@ public class CerberusItemInteraction : MonoBehaviour
         }
     }
 
+    void EatEvent() { }
+    void FinalEatEvent() { }
+
     public void CerberusEatingUpdate()
     {
         if (IsGrabbing())
@@ -76,9 +79,12 @@ public class CerberusItemInteraction : MonoBehaviour
             if (focusedItem.GetComponent<FoodObject>() != null)
             {
                 focusedItem.GetComponent<FoodObject>().TakeBite();
+                EatEvent();
                 if (focusedItem.GetComponent<FoodObject>().IsEaten())
                 {
+                    FinalEatEvent();
                     cerberus.satiation += 20;
+                    cerberus.energy -= 5;
                     ReleaseFocusedItem();
                     focusedItem.SetActive(false);
                     focusedItem = null;
@@ -88,6 +94,10 @@ public class CerberusItemInteraction : MonoBehaviour
         }
 
     }
+
+    void PlayEvent() { }
+    void FinalPlayEvent() { }
+
 
     public void CerberusPlayingUpdate()
     {
@@ -99,14 +109,17 @@ public class CerberusItemInteraction : MonoBehaviour
 
         if (timeSinceLastPlay >= inBetweenPlayPeriodTime)
         {
+            PlayEvent();
             cerberus.fun += 5;
             timeSinceLastPlay = 0;
         }
 
         if (timePlaying >= totalPlayingTime)
         {
+            FinalPlayEvent();
             ReleaseFocusedItem();
             cerberus.fun += 20;
+            cerberus.energy -= 5;
             timePlaying = 0;
             playingCooldownTimer = 0;
         }
