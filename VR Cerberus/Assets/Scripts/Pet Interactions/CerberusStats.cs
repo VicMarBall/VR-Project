@@ -6,10 +6,10 @@ public class CerberusStats : MonoBehaviour
 {
     public CerberusActionManager actionManager;
 
-    public int hygiene = 100;
-    public int satiation = 100;
-    public int fun = 100;
-    public int affection = 100;
+    public int hygiene;
+    public int satiation;
+    public int fun;
+    public int affection;
 
     public int timesHasEaten = 0;
 
