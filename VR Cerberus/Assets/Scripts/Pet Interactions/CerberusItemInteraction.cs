@@ -85,6 +85,8 @@ public class CerberusItemInteraction : MonoBehaviour
                     FinalEatEvent();
                     cerberus.satiation += 20;
                     cerberus.energy -= 5;
+                    cerberus.friendship += 10;
+                    cerberus.timesHasEaten += 1;
                     ReleaseFocusedItem();
                     focusedItem.SetActive(false);
                     focusedItem = null;
@@ -112,6 +114,7 @@ public class CerberusItemInteraction : MonoBehaviour
             PlayEvent();
             cerberus.fun += 5;
             timeSinceLastPlay = 0;
+            cerberus.energy -= 1;
         }
 
         if (timePlaying >= totalPlayingTime)
@@ -120,6 +123,7 @@ public class CerberusItemInteraction : MonoBehaviour
             ReleaseFocusedItem();
             cerberus.fun += 20;
             cerberus.energy -= 5;
+            cerberus.friendship += 10;
             timePlaying = 0;
             playingCooldownTimer = 0;
         }
