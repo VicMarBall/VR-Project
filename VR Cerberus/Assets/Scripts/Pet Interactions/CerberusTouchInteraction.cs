@@ -101,6 +101,7 @@ public class CerberusTouchInteraction : MonoBehaviour
     {
         // reaction
         cerberus.affection += 5;
+        cerberus.energy -= 1;
         Debug.Log("PetEventActivated");
         eventParticleSystem.Play();
     }
