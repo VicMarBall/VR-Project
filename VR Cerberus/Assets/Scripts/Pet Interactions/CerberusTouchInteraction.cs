@@ -56,14 +56,19 @@ public class CerberusTouchInteraction : MonoBehaviour
 
         if (timeSinceLastCleanEvent >= inBetweenCleanEventPeriodTime)
         {
-            foreach (CleaningObject cleaningObject in cleaningObjects)
-            {
-                cleaningObject.CleaningEvent();
-                cerberus.hygiene += 10;
-                cerberus.energy -= 1;
-            }
-            timeSinceLastCleanEvent = 0;
+            CleaningEvent();
         }
+    }
+
+    void CleaningEvent()
+    {
+        foreach (CleaningObject cleaningObject in cleaningObjects)
+        {
+            cleaningObject.CleaningEvent();
+            cerberus.hygiene += 10;
+            cerberus.energy -= 1;
+        }
+        timeSinceLastCleanEvent = 0;
     }
 
     void PetUpdate()
