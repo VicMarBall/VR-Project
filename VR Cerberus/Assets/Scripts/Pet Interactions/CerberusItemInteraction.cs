@@ -5,6 +5,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class CerberusItemInteraction : MonoBehaviour
 {
+    public CerberusStats cerberus;
+
     GameObject focusedItem;
 
     public float itemGrabDistance;
@@ -16,6 +18,14 @@ public class CerberusItemInteraction : MonoBehaviour
     float timeSinceLastBite = 0.0f;
     public float inBetweenBitesPeriodTime = 1.0f;
 
+    float timeSinceLastPlay = 0.0f;
+    public float inBetweenPlayPeriodTime = 1.0f;
+
+    float timePlaying = 0.0f;
+    public float totalPlayingTime = 10.0f;
+
+    float playingCooldownTimer = 0.0f;
+    public float playingCooldown = 30.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,6 +40,11 @@ public class CerberusItemInteraction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playingCooldownTimer < playingCooldown)
+        {
+            playingCooldownTimer += Time.deltaTime;
+        }
+
         if (grabbingItem)
         {
             focusedItem.transform.SetPositionAndRotation(grabSocket.gameObject.transform.position, grabSocket.gameObject.transform.rotation);
@@ -40,7 +55,7 @@ public class CerberusItemInteraction : MonoBehaviour
     {
         if (focusedItem != null)
         {
-            transform.LookAt(focusedItem.transform);
+            transform.LookAt(focusedItem.transform, Vector3.up);
 
             if (CanGrab())
             {
@@ -63,6 +78,7 @@ public class CerberusItemInteraction : MonoBehaviour
                 focusedItem.GetComponent<FoodObject>().TakeBite();
                 if (focusedItem.GetComponent<FoodObject>().IsEaten())
                 {
+                    cerberus.satiation += 20;
                     ReleaseFocusedItem();
                     focusedItem.SetActive(false);
                     focusedItem = null;
@@ -75,15 +91,25 @@ public class CerberusItemInteraction : MonoBehaviour
 
     public void CerberusPlayingUpdate()
     {
-        //if (focusedItem != null)
-        //{
-        //    transform.LookAt(focusedItem.transform);
+        if (IsGrabbing())
+        {
+            timeSinceLastPlay += Time.deltaTime;
+            timePlaying += Time.deltaTime;
+        }
 
-        //    if (CanGrab())
-        //    {
-        //        GrabFocusedItem();
-        //    }
-        //}
+        if (timeSinceLastPlay >= inBetweenPlayPeriodTime)
+        {
+            cerberus.fun += 5;
+            timeSinceLastPlay = 0;
+        }
+
+        if (timePlaying >= totalPlayingTime)
+        {
+            ReleaseFocusedItem();
+            cerberus.fun += 20;
+            timePlaying = 0;
+            playingCooldownTimer = 0;
+        }
     }
 
 
@@ -97,6 +123,8 @@ public class CerberusItemInteraction : MonoBehaviour
         if (itemGrabDistance < Vector3.Distance(focusedItem.gameObject.transform.position, gameObject.transform.position)) { return false; }
 
         if (grabbingItem) { return false; }
+
+        if (focusedItem.gameObject.CompareTag("Toy") && playingCooldownTimer < playingCooldown) { return false; }
 
         return true;
     }

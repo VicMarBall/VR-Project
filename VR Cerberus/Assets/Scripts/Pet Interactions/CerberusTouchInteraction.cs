@@ -59,6 +59,7 @@ public class CerberusTouchInteraction : MonoBehaviour
             foreach (CleaningObject cleaningObject in cleaningObjects)
             {
                 cleaningObject.CleaningEvent();
+                cerberus.hygiene += 5;
             }
             timeSinceLastCleanEvent = 0;
         }
@@ -98,6 +99,7 @@ public class CerberusTouchInteraction : MonoBehaviour
     public void PetEvent()
     {
         // reaction
+        cerberus.affection += 5;
         Debug.Log("PetEventActivated");
         eventParticleSystem.Play();
     }
