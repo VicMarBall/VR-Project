@@ -53,4 +53,9 @@ public class DaysManager : MonoBehaviour
 
         fade.FadeIn();
     }
+
+    public int GetCurrentDay()
+    {
+        return currentDay;
+    }
 }
