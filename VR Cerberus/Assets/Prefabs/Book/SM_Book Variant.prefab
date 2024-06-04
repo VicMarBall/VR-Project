@@ -2541,7 +2541,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 2298300857553735998}
         m_TargetAssemblyTypeName: PauseMenu, Assembly-CSharp
         m_MethodName: Quit
         m_Mode: 1
@@ -7404,6 +7404,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3b99f24c4a1a6094795e6463b67242fd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5500293758519826015}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 3b99f24c4a1a6094795e6463b67242fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2298300857553735998}
   m_SourcePrefab: {fileID: 100100000, guid: 3b99f24c4a1a6094795e6463b67242fd, type: 3}
 --- !u!1 &4940500680492616523 stripped
 GameObject:
@@ -7527,6 +7530,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2298300857553735998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4940500680492616523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 252063faa3bc9eb408c373676d7a1d4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 0}
 --- !u!4 &5754474002762879473 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3b99f24c4a1a6094795e6463b67242fd, type: 3}
