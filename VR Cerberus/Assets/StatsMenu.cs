@@ -5,8 +5,7 @@ using UnityEngine.UI;
 
 public class StatsMenu : MonoBehaviour
 {
-    [SerializeField]
-    private CerberusStats cerberusStats;
+    public CerberusStats cerberusStats;
 
     public Slider hygieneSlider;
     public Slider satiationSlider;
@@ -16,7 +15,6 @@ public class StatsMenu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cerberusStats = GameObject.Find("Cerberus").GetComponent<CerberusStats>();
         hygieneSlider.value = cerberusStats.hygiene;
         satiationSlider.value = cerberusStats.satiation;
         funSlider.value = cerberusStats.fun;
@@ -26,16 +24,9 @@ public class StatsMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.gameObject.active && cerberusStats != null)
-        {
-            hygieneSlider.value = cerberusStats.hygiene;
-            satiationSlider.value = cerberusStats.satiation;
-            funSlider.value = cerberusStats.fun;
-            affectionSlider.value = cerberusStats.affection;
-        }
-        else 
-        {
-            Debug.Log("Cerberus Stats Not Found");
-        }
+        hygieneSlider.value = cerberusStats.hygiene;
+        satiationSlider.value = cerberusStats.satiation;
+        funSlider.value = cerberusStats.fun;
+        affectionSlider.value = cerberusStats.affection;
     }
 }
