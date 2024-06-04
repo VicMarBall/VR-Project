@@ -94,10 +94,15 @@ public class CerberusTouchInteraction : MonoBehaviour
         switch (action)
         {
             case TouchAction.CLEAN:
+                anim.SetInteger("TouchAction", 1);
                 CleaningUpdate();
                 break;
             case TouchAction.PET:
+                anim.SetInteger("TouchAction", 0);
                 PetUpdate();
+                break;
+            case TouchAction.NO_TOUCH_ACTION:
+                anim.SetInteger("TouchAction", 2);
                 break;
             default:
                 anim.SetInteger("TouchAction", 2);
@@ -112,7 +117,6 @@ public class CerberusTouchInteraction : MonoBehaviour
         cerberus.energy -= 1;
         cerberus.friendship += 1;
         Debug.Log("PetEventActivated");
-        anim.SetInteger("TouchAction", 0);
         eventParticleSystem.Play();
     }
 
@@ -181,7 +185,6 @@ public class CerberusTouchInteraction : MonoBehaviour
                     timeSinceLastPetEvent = 0;
                     timeSinceLastCleanEvent = 0;
                     action = TouchAction.NO_TOUCH_ACTION;
-                    anim.SetInteger("TouchAction", 2);
                 }
             }
         }

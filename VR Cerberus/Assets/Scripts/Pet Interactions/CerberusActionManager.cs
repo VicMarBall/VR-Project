@@ -119,7 +119,7 @@ public class CerberusActionManager : MonoBehaviour
                 break;
 
             case CerberusAction.SLEEPING:
-                //FadeOut();
+                anim.SetInteger("STATE", 0);
                 break;
 
             default:
