@@ -26,6 +26,10 @@ public class CerberusItemInteraction : MonoBehaviour
 
     float playingCooldownTimer = 0.0f;
     public float playingCooldown = 30.0f;
+
+    [SerializeField]
+    float speed = 1;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -55,7 +59,10 @@ public class CerberusItemInteraction : MonoBehaviour
     {
         if (focusedItem != null)
         {
-            transform.LookAt(focusedItem.transform, Vector3.up);
+            Vector3 lookAtVector = new Vector3(focusedItem.transform.position.x, transform.position.y, focusedItem.transform.position.z);
+            transform.LookAt(lookAtVector, Vector3.up);
+
+            transform.Translate(Vector3.forward * Time.deltaTime * speed);
 
             if (CanGrab())
             {
