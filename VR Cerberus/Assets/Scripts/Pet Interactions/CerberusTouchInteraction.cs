@@ -12,6 +12,8 @@ public class CerberusTouchInteraction : MonoBehaviour
 
     List<CleaningObject> cleaningObjects = new List<CleaningObject>();
 
+    public Animator anim;
+
     enum TouchAction
     {
         PET,
@@ -98,6 +100,7 @@ public class CerberusTouchInteraction : MonoBehaviour
                 PetUpdate();
                 break;
             default:
+                anim.SetInteger("TouchAction", 2);
                 break;
         }
     }
@@ -109,6 +112,7 @@ public class CerberusTouchInteraction : MonoBehaviour
         cerberus.energy -= 1;
         cerberus.friendship += 1;
         Debug.Log("PetEventActivated");
+        anim.SetInteger("TouchAction", 0);
         eventParticleSystem.Play();
     }
 
@@ -177,6 +181,7 @@ public class CerberusTouchInteraction : MonoBehaviour
                     timeSinceLastPetEvent = 0;
                     timeSinceLastCleanEvent = 0;
                     action = TouchAction.NO_TOUCH_ACTION;
+                    anim.SetInteger("TouchAction", 2);
                 }
             }
         }

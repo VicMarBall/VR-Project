@@ -30,6 +30,8 @@ public class CerberusItemInteraction : MonoBehaviour
     [SerializeField]
     float speed = 1;
 
+    public Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,6 +88,7 @@ public class CerberusItemInteraction : MonoBehaviour
             if (focusedItem.GetComponent<FoodObject>() != null)
             {
                 focusedItem.GetComponent<FoodObject>().TakeBite();
+                anim.SetInteger("STATE", 5);
                 EatEvent();
                 if (focusedItem.GetComponent<FoodObject>().IsEaten())
                 {

@@ -27,12 +27,16 @@ public class CerberusActionManager : MonoBehaviour
     public CerberusTouchInteraction middleTouchInteraction;
     public CerberusTouchInteraction rightTouchInteraction;
 
+    private Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
         itemInteraction = gameObject.GetComponent<CerberusItemInteraction>();
 
         if (itemInteraction == null) { Debug.Log("CerberusItemInteraction not found");  }
+
+        anim = gameObject.GetComponent<Animator>();
     }
 
     void UpdateCurrentAction()
@@ -96,6 +100,7 @@ public class CerberusActionManager : MonoBehaviour
                 break;
 
             case CerberusAction.GRABBING_ITEM:
+                anim.SetInteger("STATE", 2);
                 if (itemInteraction.FocusedItemIsFood())
                 {
                     itemInteraction.CerberusEatingUpdate();
@@ -107,12 +112,14 @@ public class CerberusActionManager : MonoBehaviour
                 break;
 
             case CerberusAction.GETTING_TOUCHED:
+                anim.SetInteger("STATE", 3);
                 leftTouchInteraction.CerberusUpdate();
                 middleTouchInteraction.CerberusUpdate();
                 rightTouchInteraction.CerberusUpdate();
                 break;
 
             case CerberusAction.SLEEPING:
+                //FadeOut();
                 break;
 
             default:
